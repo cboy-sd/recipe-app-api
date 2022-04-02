@@ -1,3 +1,3 @@
 #!/bin/sh
-docker-compose run app sh -c "python manage.py test core"
+docker-compose run --rm app  sh -c "python manage.py test core"
 
