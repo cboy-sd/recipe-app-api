@@ -23,16 +23,15 @@ class ModelTests(TestCase):
         self.assertTrue(user.email, email.lower())
 
     def test_new_invalid_user_email(self):
-        " to verify that email address is valid and the email field is not blank "
+        """to verify that email address is valid and the email field is not blank"""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(None, "Test123")
 
     def test_create_new_super_user(self):
-        """ create super user testing function """
+        """ create supper user testing function """
         user = get_user_model().objects.create_superuser(
             "cboyc@gmail.com",
             "helloworld1223@"
         )
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
-
