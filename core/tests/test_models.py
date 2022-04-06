@@ -1,5 +1,12 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.test import TestCase
+
+from core import models
+
+
+def sample_user(email='cboy222@gmaTagil.com', password='hellomrcboy'):
+    """create a sample user"""
+    return get_user_model().objects.create_user(email, password)
 
 
 class ModelTests(TestCase):
@@ -23,7 +30,7 @@ class ModelTests(TestCase):
         self.assertTrue(user.email, email.lower())
 
     def test_new_invalid_user_email(self):
-        """to verify that email address is valid and the email field is not blank"""
+        """to verify that email address is valid"""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(None, "Test123")
 
@@ -35,3 +42,11 @@ class ModelTests(TestCase):
         )
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_tag_str(self):
+        """ test that tag is string  representation"""
+        tag = models.Tag.objects.create(
+            user=sample_user(),
+            name='Vegan',
+        )
+        self.assertEqual(str(tag), tag.name)
