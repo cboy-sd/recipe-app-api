@@ -14,12 +14,10 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
-RUN chown -R user:user /vol/
+RUN chown -R  1000:1000 /vol/
 RUN chown -R 755 /vol/web
-
 
 RUN  adduser  -D user
 RUN chown -R user /app
